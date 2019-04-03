@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <link rel="stylesheet" href="static/css/cart.css">
+  <script type="text/javascript" src="static/js/jquery-3.3.1.js">
+  </script>
+  <script type="text/javascript" src="static/js/cart.js"></script>
+ </head>
+ <body>
+	<div id="container" class="">
+<!-- 	1. 导航	 -->
+		<div id="nav" class="">
+		<!-- 1. 右侧导航 -->
+			<ul id="rightNav">
+				<li>
+                    {% if name %}
+                        <span>欢迎{{ name.name }}&nbsp;&nbsp;<a href="logout">退出</a></span>
+                    {% else %}
+                        <a href="login">[登录]&nbsp;&nbsp;&nbsp; </a>
+					    <a href="login">[注册，有惊喜]</a>
+                    {% endif %}
+					
+				</li>
+				<li>
+					<b></b>
+					果园公告		
+				</li>
+				<li>
+					<b></b>
+					券卡兑换	
+				</li>
+				<li>
+					<b></b>
+					手机果园
+				</li>
+			</ul>
+		<!-- 2. 左侧导航	-->
+			<a href="#">
+				上海
+				<i></i>
+			</a>
+			<a href="#">满百包邮（含六环）</a>
+			<a href="#">星夜达</a>
+		</div>
+<!--	2. banner	-->
+		<div id="banner" class="">
+			<img src="static/images/banner1.jpg" width="" height="" border="0" alt="">
+		</div>
+<!--	3. 推荐	-->
+		<div id="commend" class="">
+			 <img src="static/images/2ba20598135dbba5e97d241ebfa167d9.jpg" width="" height="" border="0" alt="">
+			 <img src="static/images/2ba20598135dbba5e97d241ebfa167d9.jpg" width="" height="" border="0" alt="">
+			 <img src="static/images/2ba20598135dbba5e97d241ebfa167d9.jpg" width="" height="" border="0" alt="">
+			 <img src="static/images/2ba20598135dbba5e97d241ebfa167d9.jpg" class="no-margin">
+		</div>
+<!--	4. 主体信息	-->
+        {% csrf_token %}
+		<div id="main" class="">
+<!-- 		分上下两部分 标题 + 购物车商品信息	 -->
+			<div class="title">
+				<p class="check-box">
+					<input type="checkbox" name="checkall" id="checkall">
+					全选
+				</p>
+				<p class="goods">商品</p>
+				<p class="price">单价</p>
+				<p class="count">数量</p>
+				<p class="t-sum">小计</p>
+				<p class="action">操作</p>
+			</div>
+
+			<div id="good-content" class="">
+
+			</div>
+			
+		</div>
+	</div>
+ </body>
+</html>

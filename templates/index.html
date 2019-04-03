@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <link rel="stylesheet" href="/static/css/index.css">
+             {% load static %}
+     <script src="{% static 'js/jquery-1.11.3.js' %}"></script>
+     <script src="{% static 'js/index.js'%}"></script>
+ </head>
+ <body>
+	<div id="container" class="">
+<!-- 	1. 导航	 -->
+		<div id="nav" class="">
+		<!-- 1. 右侧导航 -->
+			<ul id="rightNav">
+				<li>
+                    {% if name %}
+                        <span>欢迎{{ name.name }}&nbsp;&nbsp;<a href="logout">退出</a></span>
+                    {% else %}
+                        <a href="login">[登录]&nbsp;&nbsp;&nbsp; </a>
+					    <a href="login">[注册，有惊喜]</a>
+                    {% endif %}
+
+					
+				</li>
+				<li>
+					<b></b>
+					果园公告		
+				</li>
+				<li>
+					<b></b>
+					券卡兑换	
+				</li>
+				<li>
+					<b></b>
+					手机果园
+				</li>
+			</ul>
+		<!-- 2. 左侧导航	-->
+			<a href="#">
+				上海
+				<i></i>
+			</a>
+			<a href="#">满百包邮（含六环）</a>
+			<a href="#">星夜达</a>
+            <a href="/cart" style="float: right">我的购物车</a>
+		</div>
+<!--	2. banner	-->
+		<div id="banner" class="">
+			<img src="/static/images/banner1.jpg" width="" height="" border="0" alt="">
+		</div>
+<!--	3. 推荐	-->
+		<div id="commend" class="">
+			 <img src="/static/images/2ba20598135dbba5e97d241ebfa167d9.jpg" width="" height="" border="0" alt="">
+			 <img src="/static/images/2ba20598135dbba5e97d241ebfa167d9.jpg" width="" height="" border="0" alt="">
+			 <img src="/static/images/2ba20598135dbba5e97d241ebfa167d9.jpg" width="" height="" border="0" alt="">
+			 <img src="/static/images/2ba20598135dbba5e97d241ebfa167d9.jpg" class="no-margin">
+		</div>
+<!--	4. 主体信息	-->
+		<div id="main" class="" style="overflow: hidden">
+<!-- 		分上下结构（商品分类和信息展示）	 -->
+			<p>
+				<a href="">更多</a>
+				<img src="/static/images/t4.png">
+			</p>
+		</div>
+	</div>
+ </body>
+</html>

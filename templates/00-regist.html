@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Document</title>
+  <link rel="stylesheet" href="/static/css/00-regist.css">
+     {% load static %}
+     <script src="{% static 'js/jquery-1.11.3.js' %}"></script>
+     <script>
+         $(function () {
+             $("#uphone").blur(function () {
+                 let csrf = $("[name='csrfmiddlewaretoken']").val();
+                 let uphone = $(this).val();
+                 $.post('/check-uphone', {uphone:uphone, csrfmiddlewaretoken: csrf}, function (data) {
+                       if (data === '手机号已存在' || data === '请输入手机号'){
+                           $("#wrong").html(data);
+                           $("#registBtn").attr('disabled', true);
+                       }else {
+                           $("#wrong").html('');
+                           $("#registBtn").attr('disabled', false);
+                       }
+                 })
+             });
+             $("#registBtn").click(function () {
+                 $("#sub").attr('action', 'regist');
+                 $("#sub").submit()
+             });
+             $("#loginBtn").click(function () {
+                 $("#sub").attr('action','login');
+                 $('#sub').submit()
+             })
+         })
+
+     </script>
+ </head>
+ <body>
+	<div id="container" class="">
+<!-- 	页面分上下两部分	 -->
+		<h2>会员登录</h2>
+		<div id="regist" class="">
+<!-- 		左列结构	 -->
+			<p>
+				<img src="/static/images/huiyuan.jpg" width="" height="" border="0" alt="">
+				<a href="">会员注册></a>
+			</p>
+<!--		右列结构	 -->
+			<form id="sub" method="post" action="login">
+<!-- 		第一行		 -->
+                {% csrf_token %}
+				<div id="" class="form-line">
+					<p>手机号</p>
+					<div id="" class="">
+						<input class="form-control" id="uphone" type="text" name="uphone">
+                        <div id="wrong" style="color: red"></div>
+					</div>
+				</div>
+				<div id="" class="form-line">
+					<p>密码</p>
+					<div id="" class="">
+						<input class="form-control" type="password" name="upwd" placeholder="请输入6-20位的数字字符" maxlength="20">
+					</div>
+				</div>
+				<div id="" class="form-line">
+					<p></p>
+					<div id="" class="">
+						<p class="forget-pwd">
+							<a href="">忘记密码</a>
+							<a href="">快捷登录</a>
+						</p>
+						<input type="checkbox" name="isSave" class="isSave" id="isSave"><label for="isSave">记住密码</label>	
+					</div>
+				</div>
+				<div id="" class="form-line">
+					<p></p>
+					<div id="" class="">
+						<input id="loginBtn" class="loginBtn btn" type="button" value="登录"><input id="registBtn" class="registBtn btn" type="button" value="会员注册">
+					</div>
+				</div>
+			</form>
+			<div id="" class="clear" style="clear:both;">
+				
+			</div>
+		</div>
+
+	</div>
+ </body>
+</html>

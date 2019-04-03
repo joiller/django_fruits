@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .blo{
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+<body>
+{% csrf_token %}
+<button onclick="ajaxBtn()">发送AJAX请求</button>
+<button onclick="AjaxJq()">JQ发送AJAX请求</button>
+<button onclick="AjaxJSON()">接收JSON数据</button>
+<button onclick="AJAXJSON2()">接收数据库</button>
+<div id="show"></div>
+{% load static %}
+<script src="{% static '/js/jquery-1.11.3.js' %}"></script>
+<script>
+    function createXHR() {
+        if (XMLHttpRequest){
+            return new XMLHttpRequest();
+        }else {
+            return new ActiveXObject('Microsoft.XMLHTTP');
+        }
+    }
+
+    function ajaxBtn() {
+        let xhr = new XMLHttpRequest();
+        xhr.open('get', '/01-get', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200){
+                document.getElementById('show').innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send()
+    }
+
+    function AjaxJq() {
+        let csrf = {'csrfmiddlewaretoken': $("[name='csrfmiddlewaretoken']").val()};
+        console.log(csrf);
+        $.ajax('01-get', {
+            'success': function (data) {
+                $('#show').html(data)
+            },
+            'data': csrf,
+            'method': 'post'
+        })
+    }
+
+    function AjaxJSON() {
+        let csrf = {'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val()};
+        $.post('01-json', csrf,  function (data) {
+            data = JSON.parse(data);
+            let text = '';
+            text += '<h3>'+data.name+'</h3>';
+            text += '<h3>'+data.age+'</h3>';
+            text += '<h3>'+data.email+'</h3>';
+            $('#show').html(text);
+        })
+    }
+
+    function AJAXJSON2() {
+        $.get('02-json', function (data) {
+            $(data).each(function (i, obj) {
+                let html = '<div class="blo">';
+                html += '<h3>name:'+obj.fields.name+'</h3>';
+                html += '<h3>phone:'+obj.fields.phone+'</h3>';
+                html += '<h3>pwd:'+obj.fields.pwd+'</h3></div>';
+                $("#show").append(html);
+            });
+        }, 'json')
+    }
+</script>
+
+</body>
+</html>
