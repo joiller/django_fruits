@@ -1,10 +1,13 @@
 function js_good() {
     $.get('js_good',function (data) {
-        let time = 0;
         $(data).each(function (i, obj) {
+            let time = 0;
+            let typeGood = "<div style='overflow: hidden;margin-top: 15px'><p class='type-good' style='margin-bottom: 10px;border-top: solid'>" +
+                "<img style='height: 100px;width: 100px' src="+obj["type"]["picture"]+">" +
+                "<a style='float: right' href=\"\">更多</a>" +
+                "</p></div>";
             $(obj['good']).each(function (j, gd) {
                 time +=1;
-                console.log(gd);
                 let content = "";
                 if (time%5){
                     content += "<div class='item' style='overflow: hidden'>"
@@ -20,11 +23,11 @@ function js_good() {
                 content += "</a>";
                 content += '<img src='+obj["type"]["picture"]+' style="height:30px;width:30px;">';
                 content += "</p>";
-                content += '<span class="">&yen; '+gd["price"]+'/1份</span>';
+                content += '<span class="">&yen; '+gd["price"]+'</span>';
                 content += "</div>";
-                console.log(gd['id']);
-                $("#main").append(content)
-            })
+                typeGood = $(typeGood).append(content);
+            });
+            $("#main").append(typeGood);
         })
     }, 'json')
 }

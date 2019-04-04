@@ -22,8 +22,8 @@
                     {% if name %}
                         <span>欢迎{{ name.name }}&nbsp;&nbsp;<a href="logout">退出</a></span>
                     {% else %}
-                        <a href="login">[登录]&nbsp;&nbsp;&nbsp; </a>
-					    <a href="login">[注册，有惊喜]</a>
+                        <a href="/login">[登录]&nbsp;&nbsp;&nbsp; </a>
+					    <a href="/regist">[注册，有惊喜]</a>
                     {% endif %}
 
 					
@@ -36,7 +36,7 @@
 					<b></b>
 					券卡兑换	
 				</li>
-				<li>
+				<li style="margin-right: 10px">
 					<b></b>
 					手机果园
 				</li>
@@ -64,10 +64,7 @@
 <!--	4. 主体信息	-->
 		<div id="main" class="" style="overflow: hidden">
 <!-- 		分上下结构（商品分类和信息展示）	 -->
-			<p>
-				<a href="">更多</a>
-				<img src="/static/images/t4.png">
-			</p>
+
 		</div>
 	</div>
  </body>

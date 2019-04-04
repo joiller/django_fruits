@@ -66,14 +66,16 @@ def insert_one(request):
 
 
 def regist(request):
-    print('regist')
-    phone = request.POST.get('uphone')
-    pwd = request.POST.get('upwd')
-    name = str(int(random.random()*1000))
-    user = User(name=name, phone=phone, pwd=pwd)
-    user.save()
-    request.session['uphone'] = phone
-    return redirect('/login')
+    if request.method == 'POST':
+        phone = request.POST.get('uphone')
+        pwd = request.POST.get('upwd')
+        name = request.POST.get('name')
+        user = User(name=name, phone=phone, pwd=pwd)
+        user.save()
+        request.session['uphone'] = phone
+        return redirect('/login')
+    else:
+        return render(request, 'regist.html')
 
 
 def ajax1(request):
@@ -140,7 +142,6 @@ def logout(request):
 
 def js_good(request):
     goods = Good.objects.all()
-    goods = goods[:10]
     goodtypes = GoodType.objects.all()
     jsons = []
     for goodtype in goodtypes:
